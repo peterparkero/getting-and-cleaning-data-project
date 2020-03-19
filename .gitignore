@@ -1,0 +1,9 @@
+# RStudio
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+getting-and-cleaning-data-project.Rproj
+
+# data
+data
