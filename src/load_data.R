@@ -1,8 +1,3 @@
-
-##########################
-###   Loading data     ###
-##########################
-
 retrieve_data <- function(url, target.folder) {
   
   # Download file and unzip to data
