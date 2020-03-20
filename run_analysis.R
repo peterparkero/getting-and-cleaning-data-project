@@ -6,4 +6,5 @@ url = "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%
 target.folder = "./data"
 df <- get_full_data(url, target.folder)
 
-df
+# Filter columns
+df <- filter_mean_std_columns(df, data.folder)
