@@ -9,7 +9,7 @@ output.folder <- "./output"
 output.file.path <- file.path(output.folder, "tidy_dataset.txt")
 
 # Create default paths
-initialize_paths(target.folder, output.folder)
+initialize_paths(output.folder)
 
 # Load Data
 df <- get_full_data(url, target.folder, data.folder)
