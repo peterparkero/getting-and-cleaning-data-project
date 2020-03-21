@@ -94,13 +94,15 @@ load_table <- function(data.folder, part, X.or.y) {
   return (df)
 }
 
-get_full_data <- function(url, target.folder) {
+get_full_data <- function(url, target.folder, data.folder) {
   
   # Merge required tables
   #
   # Args:
   #  url (str): URL to getting data zip file
   #  target.folder (str): Path to data
+  #  data.folder (str): Path to actual data.
+  #                     Normally file.path(target.folder, "UCI HAR Dataset")
   #
   # Returns:
   #  df (data.table): Merged data from zip link
@@ -109,8 +111,6 @@ get_full_data <- function(url, target.folder) {
   if (!dir.exists(target.folder)) {
     retrieve_data(url, target.folder)
   }
-  
-  data.folder <- file.path(target.folder, "UCI HAR Dataset")
   
   # Load data
   train.x <- load_table(data.folder, "train", "X")
