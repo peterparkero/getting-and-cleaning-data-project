@@ -21,3 +21,4 @@ df <- filter_columns(df)
 summary.df <- summarize_data(df)
 
 # Write to output
+write.table(summary.df, file = output.file.path, row.names = FALSE)
