@@ -4,7 +4,6 @@ filter_columns <- function(df) {
   #
   # Args:
   #  df (data.table): Data table containing full data set
-  #  data.folder (str): Path to data folder, where features.txt is located at
   #
   # Returns:
   #  df (data.table): Full data set with only mean and standard deviation columns
