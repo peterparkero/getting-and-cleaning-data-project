@@ -9,8 +9,8 @@ retrieve_data <- function(url, target.folder) {
   
   # Download and Unzip
   temp.file <- tempfile()
-  download.file(URL, temp.file)
-  unzip(temp.file, exdir = TARGET.FOLDER)
+  download.file(url, temp.file)
+  unzip(temp.file, exdir = target.folder)
   file.remove(temp.file)
   
 }
