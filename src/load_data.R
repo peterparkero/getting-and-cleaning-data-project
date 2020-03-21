@@ -34,6 +34,25 @@ load_x_header <- function(data.folder) {
   return (header)
 }
 
+load_activity_df <- function(data.folder) {
+  
+  # Load activity mapping from file.
+  #
+  # Args:
+  #  data.folder (str): Path to data folder, where activity_labels.txt is located at
+  #
+  # Returns:
+  #  activity.df (data.table): Activity mapping with respective target label
+  
+  activity.df <- read.table(
+    file.path(data.folder, "activity_labels.txt"),
+    col.names = c("Label", "Activity"),
+    stringsAsFactors = FALSE)
+  
+  return (activity.df)
+  
+}
+
 load_table <- function(data.folder, part, X.or.y) {
   
   # Load a table.
@@ -54,7 +73,9 @@ load_table <- function(data.folder, part, X.or.y) {
   if (X.or.y == "X") {
     header <- load_x_header(data.folder)  
   } else if (X.or.y == "y") {
-    header <- c("label")
+    header <- c("Label")
+  } else {
+    stop("X.or.y must be either \"X\" or \"y\"")
   }
   
   # Load table
@@ -62,6 +83,13 @@ load_table <- function(data.folder, part, X.or.y) {
     file.path(data.folder, part, paste0(X.or.y, "_", part, ".txt")),
     col.names = header
     )
+  
+  # Update activity labels to descriptions
+  if (X.or.y == "y") {
+    activity.df <- load_activity_df(data.folder)
+    df <- dplyr::left_join(df, activity.df, by = "Label")
+    df <- df["Activity"]
+  }
   
   return (df)
 }

@@ -10,7 +10,7 @@ filter_mean_std_columns(df, data.folder) {
   #  df (data.table): Full data set with only mean and standard deviation columns
   
   header <- load_x_header(data.folder)
-  filtered.headers <- grep("mean|std", header, value = TRUE)
+  filtered.headers <- grep("mean|std|Activity|Subject", header, value = TRUE)
   df <- df[filtered.headers]
   return (df)
   
