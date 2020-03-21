@@ -1,4 +1,4 @@
-filter_mean_std_columns(df, data.folder) {
+filter_columns <- function(df, data.folder) {
   
   # Extracts only the measurements on the mean and standard deviation for each measurement.
   #
