@@ -9,4 +9,4 @@ data.folder <- file.path(target.folder, "UCI HAR Dataset")
 df <- get_full_data(url, target.folder, data.folder)
 
 # Filter columns
-df <- filter_columns(df, data.folder)
+df <- filter_columns(df)
