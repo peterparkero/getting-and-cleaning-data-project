@@ -15,3 +15,17 @@ filter_columns <- function(df) {
   
 }
 
+summarize_data <- function(df) {
+ 
+  # Summarize data by finding average of each variable for each activity and each subject.
+  #
+  # Args:
+  #  df (data.table): Data table containing full data set
+  #
+  # Returns:
+  #  df (data.frame): Summary table with average of each variable for each activity and each subject.
+  
+  df <- as.data.frame(dplyr::summarise_all(dplyr::group_by(df, Subject, Activity), list(mean)))
+  return (df)
+
+}

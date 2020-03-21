@@ -10,3 +10,6 @@ df <- get_full_data(url, target.folder, data.folder)
 
 # Filter columns
 df <- filter_columns(df)
+
+# Summarize data
+summary.df <- summarize_data(df)
