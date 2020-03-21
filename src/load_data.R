@@ -53,39 +53,44 @@ load_activity_df <- function(data.folder) {
   
 }
 
-load_table <- function(data.folder, part, X.or.y) {
+load_table <- function(data.folder, part, X.y.subject) {
   
   # Load a table.
   #
   # Args:
   #  data.folder (str): Path to data folder, where train/test folder are located at
   #  part (str): Which part of the data to load. Either "train" or "test".
-  #  X.or.y (str): Which part of the data to load. "X" for features, "y" for labels.
+  #  X.y.subject (str): Which part of the data to load.
+  #                     "X" for features, 
+  #                     "y" for labels,
+  #                     "subject" for subject labels.
   #
   # Returns:
   #  df (data.table): Data table loaded.
   
   # Check input
   stopifnot(part %in% c("train", "test"),
-            X.or.y %in% c("X", "y"))
+            X.y.subject %in% c("X", "y", "subject"))
 
   # Load header
-  if (X.or.y == "X") {
-    header <- load_x_header(data.folder)  
-  } else if (X.or.y == "y") {
+  if (X.y.subject == "X") {
+    header <- load_x_header(data.folder)
+  } else if (X.y.subject == "y") {
     header <- c("Label")
+  } else if (X.y.subject == "subject") {
+    header <- c("Subject")
   } else {
-    stop("X.or.y must be either \"X\" or \"y\"")
+    stop("X.y.subject must be either \"X\" or \"y\" or \"subject\".")
   }
   
   # Load table
   df <- read.table(
-    file.path(data.folder, part, paste0(X.or.y, "_", part, ".txt")),
-    col.names = header
+    file.path(data.folder, part, paste0(X.y.subject, "_", part, ".txt"))
     )
+  colnames(df) <- header  # If directly loaded, names are trimmed
   
   # Update activity labels to descriptions
-  if (X.or.y == "y") {
+  if (X.y.subject == "y") {
     activity.df <- load_activity_df(data.folder)
     df <- dplyr::left_join(df, activity.df, by = "Label")
     df <- df["Activity"]
@@ -115,13 +120,16 @@ get_full_data <- function(url, target.folder, data.folder) {
   # Load data
   train.x <- load_table(data.folder, "train", "X")
   train.y <- load_table(data.folder, "train", "y")
+  train.sub <- load_table(data.folder, "train", "subject")
   test.x <- load_table(data.folder, "test", "X")
   test.y <- load_table(data.folder, "test", "y")
+  test.sub <- load_table(data.folder, "test", "subject")
   
   # Merge
   x <- rbind(train.x, test.x)
   y <- rbind(train.y, test.y)
-  df <- cbind(x, y)
+  sub.df <- rbind(train.sub, test.sub)
+  df <- cbind(x, y, sub.df)
   
   return (df)
 }
