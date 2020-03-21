@@ -8,6 +8,8 @@ data.folder <- file.path(target.folder, "UCI HAR Dataset")
 output.folder <- "./output"
 output.file.path <- file.path(output.folder, "tidy_dataset.txt")
 
+# Create default paths
+initialize_paths(target.folder, output.folder)
 
 # Load Data
 df <- get_full_data(url, target.folder, data.folder)
