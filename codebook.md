@@ -95,18 +95,18 @@ The summary data set contains the following fields:
 From the original data set, the following transformations are applied:
 
 1. Merge the training and the test sets to create one data set.  These tables include:
-  - `./data/UCI HAR Dataset/train/X_train.txt`
-  - `./data/UCI HAR Dataset/train/y_train.txt`
-  - `./data/UCI HAR Dataset/train/subject_train.txt`
-  - `./data/UCI HAR Dataset/test/X_test.txt`
-  - `./data/UCI HAR Dataset/test/y_test.txt`
-  - `./data/UCI HAR Dataset/test/subject_test.txt`
+    - `./data/UCI HAR Dataset/train/X_train.txt`
+    - `./data/UCI HAR Dataset/train/y_train.txt`
+    - `./data/UCI HAR Dataset/train/subject_train.txt`
+    - `./data/UCI HAR Dataset/test/X_test.txt`
+    - `./data/UCI HAR Dataset/test/y_test.txt`
+    - `./data/UCI HAR Dataset/test/subject_test.txt`
   
 2. Extract only the measurements on the mean and standard deviation for each measurement.  This is done by getting all columns that contain either:
-  - Activity
-  - Subject
-  - mean
-  - std
+    - Activity
+    - Subject
+    - mean
+    - std
   
 3. Uses descriptive activity names to name the activities in the data set.  This is done by performing a left join from `./data/UCI HAR Dataset/activity_labels.txt` to `./data/UCI HAR Dataset/train/y_train.txt` and `./data/UCI HAR Dataset/test/y_test.txt` data frames.  The original activity labels are then removed to avoid duplication of information.
 
