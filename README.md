@@ -22,3 +22,4 @@ This is the course project for the Getting and Cleaning Data Coursera course, pa
 ## Others
 - `data` folder
     - This folder does not exist in the code base, but is created when the script is run.  This is the location where the data is downloaded to from [UCI HAR Dataset](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip).
+- `.gitignore` contains files to ignore for commiting by Git.
